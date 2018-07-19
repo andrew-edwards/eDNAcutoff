@@ -64,7 +64,8 @@ remove_false_pos = function(data, mT=4, category = FALSE, tol = 0.2, ...) {
       for(j in 2:dim(output)[2]) {
           output[i,j] = output[i,j] *
                         !( (output[i,j] <= threshold[i]) &
-                           (output[i,j] <= tol * max.species.read[j]) )
+                           (output[i,j] <= tol * max.species.read[j])
+                         )
       }
   }
   if(category) {
