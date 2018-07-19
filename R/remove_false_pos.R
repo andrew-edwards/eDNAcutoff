@@ -19,7 +19,8 @@
 ##' proportion of the maximum number of reads of that speces across all samples.
 ##' @param ...
 ##' @return A tbl_df with susepcted false positive reads set to 0.
-##' @author
+##' @author Andrew Edwards
+##' @export
 remove_false_pos = function(data, mT=4, category = FALSE, tol = 0.2, ...) {
     if(class(data)[1] != "tbl_df")
        stop("First argument needs to be a dataframe.")
