@@ -34,37 +34,35 @@ remove_false_pos = function(data, mT=4, category = FALSE, tol = 0.2, ...) {
     # names of the non-mock species:
     non.mock.spec.names = names(data.use)[(2+mT):ncol]
 
-  non.mock.samples = filter(data.use, Sample_name != "mock")
-  non.mock.samples.mock.spec = select(non.mock.samples, mock.spec.names)
-  max.reads = max(non.mock.samples.mock.spec)
+    non.mock.samples = filter(data.use, Sample_name != "mock")
+    non.mock.samples.mock.spec = select(non.mock.samples, mock.spec.names)
+    max.reads = max(non.mock.samples.mock.spec)
 
-  max.row.col = which(non.mock.samples.mock.spec == max.reads, arr.ind=TRUE)
-  imax.num = max.row.col[,"row"]        # only refers to non.mock.samples
-  imax = pull(non.mock.samples[imax.num, "Sample_name"])   # name of imax row
-  # imax as per write up (row name of non-mock sample that has the maximum
-  #  number of reads of any of the mock species), but could be more than one row.
-  if(length(imax) > 1) stop("Not implemented for imax > 1 yet.")
+    max.row.col = which(non.mock.samples.mock.spec == max.reads, arr.ind=TRUE)
+    imax.num = max.row.col[,"row"]
+    # only refers to non.mock.samples
 
-  imax.row.sum = sum(select( filter(data.use, Sample_name == imax), -Sample_name))
+    imax = pull(non.mock.samples[imax.num, "Sample_name"])   # name of imax row
+    # imax as per write up (row name of non-mock sample that has the maximum
+    #  number of reads of any of the mock species), but could be more than one row.
+    if(length(imax) > 1) stop("Not implemented for imax > 1 yet.")
 
-  P = max.reads / imax.row.sum
-  sample.total.reads = rowSums(data.use[, 2:ncol])
-  threshold = P * sample.total.reads
+    imax.row.sum = sum(select( filter(data.use, Sample_name == imax), -Sample_name))
 
-  max.species.read = c(NA, sapply(data.use[,2:ncol], max))
+    P = max.reads / imax.row.sum
+    sample.total.reads = rowSums(data.use[, 2:ncol])
+    threshold = P * sample.total.reads
 
-  output = data.use
+    max.species.read = c(NA, sapply(data.use[,2:ncol], max))
 
-  # Set the suspected false positives to zero.
-  # Presumably this can be done without loops, but apply etc. always confuse me,
-  #  and it's a bit fiddly because of the two conditions needed:
-  for(i in 1:dim(output)[1])
-    {
-      for(j in 2:dim(output)[2])
-        {
-          output[i,j] = output[i,j] *
-                          !( (output[i,j] <= threshold[i]) &
-                          (output[i,j] <= tol * max.species.read[j]) )
+    output = data.use
+
+    # Set the suspected false positives to zero.
+    for(i in 1:dim(output)[1]) {
+      for(j in 2:dim(output)[2]) {
+        output[i,j] = output[i,j] *
+                        !( (output[i,j] <= threshold[i]) &
+                           (output[i,j] <= tol * max.species.read[j]) )
         }
     }
   if(category) { output = bind_cols(output[,1], select(data, 2), output[,-1]) }
