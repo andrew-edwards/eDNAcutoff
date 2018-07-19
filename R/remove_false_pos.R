@@ -22,51 +22,54 @@
 ##' @author Andrew Edwards
 ##' @export
 remove_false_pos = function(data, mT=4, category = FALSE, tol = 0.2, ...) {
-    if(class(data)[1] != "tbl_df")
-       stop("First argument needs to be a dataframe.")
-    if(!("mock" %in% data$Sample_name))
-       stop("Need a mock sample.")
-    data.use = data
-    if(category) { data.use = select(data.use, -2) }
-    ncol = dim(data.use)[2]
-    # names of the mT mock species:
-    mock.spec.names = names(data.use)[2:(2+mT-1)]
+  if(class(data)[1] != "tbl_df") stop("First argument needs to be a dataframe.")
+  if(!("mock" %in% data$Sample_name)) stop("Need a mock sample.")
 
-    # names of the non-mock species:
-    non.mock.spec.names = names(data.use)[(2+mT):ncol]
+  data.use = data
+  if(category) { data.use = select(data.use, -2) }
 
-    non.mock.samples = filter(data.use, Sample_name != "mock")
-    non.mock.samples.mock.spec = select(non.mock.samples, mock.spec.names)
-    max.reads = max(non.mock.samples.mock.spec)
+  ncol = dim(data.use)[2]
 
-    max.row.col = which(non.mock.samples.mock.spec == max.reads, arr.ind=TRUE)
-    imax.num = max.row.col[,"row"]
-    # only refers to non.mock.samples
+  # names of the mT mock species:
+  mock.spec.names = names(data.use)[2:(2+mT-1)]
 
-    imax = pull(non.mock.samples[imax.num, "Sample_name"])   # name of imax row
-    # imax as per write up (row name of non-mock sample that has the maximum
-    #  number of reads of any of the mock species), but could be more than one row.
-    if(length(imax) > 1) stop("Not implemented for imax > 1 yet.")
+  # names of the non-mock species:
+  non.mock.spec.names = names(data.use)[(2+mT):ncol]
 
-    imax.row.sum = sum(select( filter(data.use, Sample_name == imax), -Sample_name))
+  non.mock.samples = filter(data.use, Sample_name != "mock")
+  non.mock.samples.mock.spec = select(non.mock.samples, mock.spec.names)
+  max.reads = max(non.mock.samples.mock.spec)
 
-    P = max.reads / imax.row.sum
-    sample.total.reads = rowSums(data.use[, 2:ncol])
-    threshold = P * sample.total.reads
+  max.row.col = which(non.mock.samples.mock.spec == max.reads, arr.ind=TRUE)
+  imax.num = max.row.col[,"row"]
+  # only refers to non.mock.samples
 
-    max.species.read = c(NA, sapply(data.use[,2:ncol], max))
+  imax = pull(non.mock.samples[imax.num, "Sample_name"])   # name of imax row
+  # imax as per write up (row name of non-mock sample that has the maximum
+  #  number of reads of any of the mock species), but could be more than one row.
+  if(length(imax) > 1) stop("Not implemented for imax > 1 yet.")
 
-    output = data.use
+  imax.row.sum = sum(select( filter(data.use, Sample_name == imax), -Sample_name))
 
-    # Set the suspected false positives to zero.
-    for(i in 1:dim(output)[1]) {
+  P = max.reads / imax.row.sum
+  sample.total.reads = rowSums(data.use[, 2:ncol])
+  threshold = P * sample.total.reads
+
+  max.species.read = c(NA, sapply(data.use[,2:ncol], max))
+
+  output = data.use
+
+  # Set the suspected false positives to zero.
+  for(i in 1:dim(output)[1]) {
       for(j in 2:dim(output)[2]) {
-        output[i,j] = output[i,j] *
+          output[i,j] = output[i,j] *
                         !( (output[i,j] <= threshold[i]) &
                            (output[i,j] <= tol * max.species.read[j]) )
-        }
-    }
-  if(category) { output = bind_cols(output[,1], select(data, 2), output[,-1]) }
+      }
+  }
+  if(category) {
+      output = bind_cols(output[,1], select(data, 2), output[,-1])
+  }
   return(output)
 }
 
