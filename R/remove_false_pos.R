@@ -25,7 +25,7 @@
 ##'
 remove_false_pos = function(data, mT=4, category = FALSE, tol = 0.2, ...) {
   if(class(data)[1] != "tbl_df") stop("First argument needs to be a dataframe.")
-  if(!("mock" %in% data$Sample_name)) stop("Need a mock sample.")
+  if(!("Mock" %in% data$Sample_name)) stop("Need a mock sample.")
 
   data.use = data
   if(category) { data.use = select(data.use, -2) }
@@ -78,7 +78,7 @@ remove_false_pos = function(data, mT=4, category = FALSE, tol = 0.2, ...) {
 
 
 # Running this, need to tidy up:
-# input.test = read.csv("../inst/extdata/simple_mock.csv",
-#                      header=TRUE, comment.char="#")
-# input.test = tbl_df(input.test)
-# remove_false_pos(input.test)
+input.test = read.csv("../inst/extdata/simple_mock.csv",
+                      header=TRUE, comment.char="#")
+ input.test = tbl_df(input.test)
+ output.test = remove_false_pos(input.test, mT=4)
