@@ -1,0 +1,7 @@
+# Simple test file to check with manual calculations
+# ,,Mock_Species,,,,Species_in_environment,,,,,,,,,,,,,,,,,
+Sample_name,Category_Sample_blank,Amia_calva,Notropis_bifrenatus,Lepomis_cyanellus,Hypentelium_nigricans,Lepomis_gibbosus,Perca_flavescens,Oncorhynchus_mykiss
+mock,m,257329,169668,79560,47859,53,17,12
+ev_0_0_f_h,s,17,7,9,6,42,17,61802
+ev_0_0_f_v,s,0,5,0,0,43997,10,17
+ev_11.5_11.5_f_v,s,0,0,0,0,26,1,22621
