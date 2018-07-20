@@ -77,5 +77,8 @@ remove_false_pos = function(data, mT=4, category = FALSE, tol = 0.2, ...) {
 }
 
 
-
-
+# Running this, need to tidy up:
+# input.test = read.csv("../inst/extdata/simple_mock.csv",
+#                      header=TRUE, comment.char="#")
+# input.test = tbl_df(input.test)
+# remove_false_pos(input.test)
