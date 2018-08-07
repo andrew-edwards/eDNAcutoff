@@ -1,4 +1,4 @@
-Package: eDNAfalse
+Package: eDNAcutoff
 Title: Methods for Detecting Suspected False Positives in eDNA Samples
 Version: 0.0.0.9000
 Authors@R: person("Andrew", "Edwards", email = "Andrew.Edwards@dfo-mpo.gc.ca",
