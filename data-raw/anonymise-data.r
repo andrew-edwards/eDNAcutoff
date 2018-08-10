@@ -11,7 +11,7 @@ big_example <- dplyr::filter(big_example, Category_Sample_blank != "b") %>%
 # Anonymise and save
 names(big_example) <- c("Sample", "m1", "m2", "m3", "m4",
                         1:(length(names(big_example))-5))
-big_example$Sample = c("M", 1:(length(big_example$Sample)-1))
+big_example$Sample = c("mock", 1:(length(big_example$Sample)-1))
 
 usethis::use_data(big_example, overwrite = TRUE)
 
@@ -26,7 +26,7 @@ small_example <- dplyr::select(small_example, -Category_Sample_blank)
 # Anonymise and example
 names(small_example) <- c("Sample", "m1", "m2", "m3", "m4",
                         1:(length(names(small_example))-5))
-small_example$Sample <- c("M", 1:(length(small_example$Sample)-1))
+small_example$Sample <- c("mock", 1:(length(small_example$Sample)-1))
 
 usethis::use_data(small_example, overwrite = TRUE)
 
