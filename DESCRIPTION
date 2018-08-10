@@ -11,3 +11,5 @@ LazyData: true
 BugReports: https://github.com/andrew-edwards/eDNAcutoff
 Imports:
     dplyr
+Suggests: 
+    testthat
