@@ -2,3 +2,6 @@
 .Rhistory
 .RData
 *~
+
+data-raw/data_for_andy.csv
+data-raw/data_manual_test.csv
