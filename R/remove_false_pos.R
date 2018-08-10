@@ -9,9 +9,9 @@
 ##' mock sample and remaining rows are real samples. The first column must be
 ##' called Sample_name and gives the name of the samples (mock sample must be
 ##' called 'mock'), next column is the category (if category == TRUE) which
-##' gets removed for this function, next mT columns are reads of mock species,
+##' gets removed for this function, next mN columns are reads of mock species,
 ##' and the remaining columns are reads of non-mock species.
-##' @param mT Total number of mock species.
+##' @param mN Total number of mock species.
 ##' @param category TRUE if second column is a category column, FALSE if there
 ##' is no category column.
 ##' @param tol Tolerance for keeping potential false positive reads -- a number
@@ -23,7 +23,7 @@
 ##' @export
 ##' @examples
 ##'
-remove_false_pos = function(data, mT=4, category = FALSE, tol = 0.2, ...) {
+remove_false_pos = function(data, mN=4, category = FALSE, tol = 0.2, ...) {
   if(class(data)[1] != "tbl_df") stop("First argument needs to be a dataframe.")
   if(!("mock" %in% data$Sample_name)) stop("Need a mock sample.")
 
@@ -32,11 +32,11 @@ remove_false_pos = function(data, mT=4, category = FALSE, tol = 0.2, ...) {
 
   ncol = dim(data.use)[2]
 
-  # names of the mT mock species:
-  mock.spec.names = names(data.use)[2:(2+mT-1)]
+  # names of the mN mock species:
+  mock.spec.names = names(data.use)[2:(2+mN-1)]
 
   # names of the non-mock species:
-  non.mock.spec.names = names(data.use)[(2+mT):ncol]
+  non.mock.spec.names = names(data.use)[(2+mN):ncol]
 
   non.mock.samples = filter(data.use, Sample_name != "mock")
   non.mock.samples.mock.spec = select(non.mock.samples, mock.spec.names)
@@ -86,7 +86,7 @@ remove_false_pos = function(data, mT=4, category = FALSE, tol = 0.2, ...) {
 #input.test = read.csv("../inst/extdata/simple_mock.csv",
 #                      header=TRUE, comment.char="#")
 # input.test = tbl_df(input.test)
-# output.test = remove_false_pos(input.test, mT=4)
+# output.test = remove_false_pos(input.test, mN=4)
 
 
 
@@ -96,5 +96,5 @@ input.raw = read.csv("../../eDNA-filter/data/data_for_andy.csv", header=TRUE, co
 input.raw = tbl_df(input.raw)
 input = filter(input.raw, Category_Sample_blank != "b")
 input = select(input, -Category_Sample_blank)
-output = remove_false_pos(input, mT=4)
+output = remove_false_pos(input, mN=4)
 
