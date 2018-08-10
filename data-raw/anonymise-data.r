@@ -1,5 +1,6 @@
 # Anonymise the species and sample names in Davon's raw data and the simplified
-#  data set, and simplify Davon's data set (remove Category_Sample_blank column).
+#  data set, and simplify Davon's data set (remove Category_Sample_blank column)
+#  and create examples.
 
 big_example <- readr::read_csv("data-raw/data_for_andy.csv",
                                comment="#")
@@ -14,6 +15,11 @@ names(big_example) <- c("Sample", "m1", "m2", "m3", "m4",
 big_example$Sample = c("mock", 1:(length(big_example$Sample)-1))
 
 usethis::use_data(big_example, overwrite = TRUE)
+
+# Running this once to create test result
+# big_example_result <- remove_false_pos(big_example)
+# usethis::use_data(big_example_result, overwrite = TRUE)
+
 
 # Do same for small example
 
@@ -31,7 +37,7 @@ small_example$Sample <- c("mock", 1:(length(small_example$Sample)-1))
 usethis::use_data(small_example, overwrite = TRUE)
 
 # Save here to then manually edit for expected result after using
-#  remove_false_pos().  So if re-run this line then have to manually edit again.
+#  remove_false_pos().  So if re-run this line then have to manually edit again:
 # readr::write_csv(small_example, "data-raw/data_manual_test_result.csv")
 
 small_example_result <- readr::read_csv("data-raw/data_manual_test_result.csv")
