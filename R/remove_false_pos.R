@@ -75,26 +75,3 @@ remove_false_pos = function(data, mN=4, category = FALSE, tol = 0.2, ...) {
   }
   return(output)
 }
-
-
-# Running this, need to tidy up:  # Actually test didn't work before anyway.
-# Notes said:
-# MAY NEED to refine based on no blank column (or may just work fine still
-#  since have changed default in function).
-# Shorter test file, to check it matches what was done manually in the write up:
-
-#input.test = read.csv("../inst/extdata/simple_mock.csv",
-#                      header=TRUE, comment.char="#")
-# input.test = tbl_df(input.test)
-# output.test = remove_false_pos(input.test, mN=4)
-
-
-
-# To run on full data set (which is not being made available in package):
-# Full data file
-input.raw = read.csv("../../eDNA-filter/data/data_for_andy.csv", header=TRUE, comment.char="#")
-input.raw = tbl_df(input.raw)
-input = filter(input.raw, Category_Sample_blank != "b")
-input = select(input, -Category_Sample_blank)
-output = remove_false_pos(input, mN=4)
-
