@@ -28,7 +28,7 @@ remove_false_pos = function(data, mN=4, category = FALSE, tol = 0.2, ...) {
   if(!("mock" %in% data$Sample)) stop("Need a mock sample.")
 
   data.use = data
-  if(category) { data.use = select(data.use, -2) }
+  if(category) { data.use = dplyr::select(data.use, -2) }
 
   ncol = dim(data.use)[2]
 
@@ -38,20 +38,21 @@ remove_false_pos = function(data, mN=4, category = FALSE, tol = 0.2, ...) {
   # names of the non-mock species:
   non.mock.spec.names = names(data.use)[(2+mN):ncol]
 
-  non.mock.samples = filter(data.use, Sample != "mock")
-  non.mock.samples.mock.spec = select(non.mock.samples, mock.spec.names)
+  non.mock.samples = dplyr::filter(data.use, Sample != "mock")
+  non.mock.samples.mock.spec = dplyr::select(non.mock.samples, mock.spec.names)
   max.reads = max(non.mock.samples.mock.spec)
 
   max.row.col = which(non.mock.samples.mock.spec == max.reads, arr.ind=TRUE)
   imax.num = max.row.col[,"row"]
   # only refers to non.mock.samples
 
-  imax = pull(non.mock.samples[imax.num, "Sample"])   # name of imax row
+  imax = dplyr::pull(non.mock.samples[imax.num, "Sample"])   # name of imax row
   # imax as per write up (row name of non-mock sample that has the maximum
   #  number of reads of any of the mock species), but could be more than one row.
   if(length(imax) > 1) stop("Not implemented for imax > 1 yet.")
 
-  imax.row.sum = sum(select( filter(data.use, Sample == imax), -Sample))
+  imax.row.sum = sum(dplyr::select( dplyr::filter(data.use, Sample == imax),
+                                   -Sample))
 
   P = max.reads / imax.row.sum
   sample.total.reads = rowSums(data.use[, 2:ncol])
@@ -71,7 +72,7 @@ remove_false_pos = function(data, mN=4, category = FALSE, tol = 0.2, ...) {
       }
   }
   if(category) {
-      output = bind_cols(output[,1], select(data, 2), output[,-1])
+      output = dplyr::bind_cols(output[,1], dplyr::select(data, 2), output[,-1])
   }
   return(output)
 }
