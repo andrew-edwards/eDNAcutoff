@@ -11,8 +11,9 @@
 which_set_to_zero = function(original, result) {
   if(class(original)[1] != "tbl_df") stop("First argument needs to be a tibble dataframe.")
   if(class(result)[1] != "tbl_df") stop("First argument needs to be a tibble dataframe.")
-  if(dim(original) != dim(result)) stop("Both arguments need to have the same dimension.")
+  if(dim(original)[1] != dim(result)[1]) stop("Both arguments need to have the same dimension.")
+  if(dim(original)[2] != dim(result)[2]) stop("Both arguments need to have the same dimension.")
 
   ans <- dplyr::select(original, -1) - dplyr::select(result, -1)
-  cbind(dplyr::select(input, 1), ans)
+  cbind(dplyr::select(original, 1), ans)
 }
