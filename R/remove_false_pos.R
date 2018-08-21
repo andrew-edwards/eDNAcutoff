@@ -3,7 +3,7 @@
 ##' Removes suspected false positives from a data frame of numbers of reads
 ##' from machine fragments of DNA that match each species in each sample.
 ##' @title Maybe it goes here
-##' @param data A tbl_df (table data frame, using dplyr) consisting of each row
+##' @param data A tibble (table data frame, using dplyr) consisting of each row
 ##' representing a sample with values indicating the number of reads of each
 ##' species, with species represented by columns. The first row represents a
 ##' mock sample and remaining rows are real samples. The first column must be
@@ -18,13 +18,13 @@
 ##' of reads is only declared to be a false positive if it is less than 'tol'
 ##' proportion of the maximum number of reads of that speces across all samples.
 ##' @param ...
-##' @return A tbl_df with susepcted false positive reads set to 0.
+##' @return A tibble with susepcted false positive reads set to 0.
 ##' @author Andrew Edwards
 ##' @export
 ##' @examples
 ##'
 remove_false_pos = function(data, mN=4, category = FALSE, tol = 0.2, ...) {
-  if(class(data)[1] != "tbl_df") stop("First argument needs to be a dataframe.")
+  if(class(data)[1] != "tbl_df") stop("First argument needs to be a tibble dataframe.")
   if(!("mock" %in% data$Sample)) stop("Need a mock sample.")
 
   data.use = data
