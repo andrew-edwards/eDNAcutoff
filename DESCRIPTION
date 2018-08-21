@@ -12,4 +12,7 @@ BugReports: https://github.com/andrew-edwards/eDNAcutoff
 Imports:
     dplyr
 Suggests: 
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
