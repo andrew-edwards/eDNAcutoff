@@ -16,7 +16,7 @@ change_alpha = function(data, alpha.vec = seq(0, 1, 0.1), mN = 4) {
   N <- length(alpha.vec)
   out.list = list()       # Will be a list of dataframes, each being the result for
                         #  the corresponding value of alpha.vec
-  num.removed = vector(length = N)  # Try vector(length = length(alpha.vec))
+  num.zeroed = vector(length = N)  # Try vector(length = length(alpha.vec))
   num.mock.sp.left = vector(length = N)
   num.samp.rem.with.mock.sp = vector(length = N)
 
@@ -25,16 +25,16 @@ change_alpha = function(data, alpha.vec = seq(0, 1, 0.1), mN = 4) {
       out.list[[i]] = remove_false_pos(data, mN = mN, alpha = alpha.vec[i])
       diff = which_set_to_zero(data, out.list[[i]])
 
-      num.removed[i] = sum(as.vector(diff) > 0,
+      num.zeroed[i] = sum(as.vector(diff) > 0,
                            na.rm = TRUE)    # CHECK doesn't give warnings
       mock.sp.out = out.list[[i]][2:dim(out.list[[i]])[1], 2:(mN + 1)]
         # just mock species in non-mock samples. **assumes one mock sample
-      # num.mock.sp.removed[i] = sum(as.vector(mock.sp.rem) > 0)
+      # num.mock.sp.zeroed[i] = sum(as.vector(mock.sp.rem) > 0)
       num.mock.sp.left[i] = sum(as.vector(mock.sp.out > 0))
       num.samp.rem.with.mock.sp[i] = sum(rowSums(mock.sp.out) > 0)
     }
   return(list(out.list = out.list,
-              num.removed = num.removed,
+              num.zeroed = num.zeroed,
               num.mock.sp.left = num.mock.sp.left,
               num.samp.rem.with.mock.sp = num.samp.rem.with.mock.sp))
 }

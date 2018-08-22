@@ -59,7 +59,68 @@ small_set_to_zero <- which_set_to_zero(small_example, small_removed)
 knitr::kable(small_set_to_zero)
 ```
 
-That used the default value of 0.2 for the parameter alpha (yes??).....
+That used the default value of 0.2 for the parameter $\alpha$, which is the
+tolerance for ...**add text**
+
+To test sensitivity to $\alpha$ use the function `change_alpha()` for a vector
+of $\alpha$ values:
+
+
+```{r, echo=TRUE, results='asis'}
+alpha_values <- seq(0, 1, 0.1)
+small_sens_alpha <- change_alpha(small_example, alpha.vec = alpha_values)
+```
+
+which returns a list containing:
+
+- the number of reads set to zero (for each value of `alpha_values`)
+
+```{r, echo=TRUE}
+small_sens_alpha$num.zeroed
+```
+
+- the number of mock species left in non-mock samples (**check**)
+```{r, echo=TRUE}
+small_sens_alpha$num.mock.sp.left
+```
+
+- the number of non-mock (check**?) samples remaining with non-mock species
+```{r, echo=TRUE}
+small_sens_alpha$num.samp.rem.with.mock.sp
+```
+
+- a data frame (tibble) for each value of `alpha_values`,
+for example
+
+```{r, echo=TRUE}
+alpha_values[6]
+```
+
+```{r, echo=TRUE, eval=FALSE}
+small_sens_alpha$out.list[[6]]
+```
+
+```{r, echo=FALSE}
+knitr::kable(small_sens_alpha$out.list[[6]])
+```
+
+and
+
+
+```{r, echo=TRUE}
+alpha_values[7]
+```
+
+```{r, echo=TRUE, eval=FALSE}
+small_sens_alpha$out.list[[7]]
+```
+
+```{r, echo=FALSE}
+knitr::kable(small_sens_alpha$out.list[[7]])
+```
+
+Note how the read of 10 for sample 2 and species 2 gets kept for $\alpha=0.5$
+but zeroed for $\alpha=0.6$.
 
 ## Big example
 
