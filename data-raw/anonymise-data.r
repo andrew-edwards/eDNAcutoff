@@ -20,6 +20,10 @@ usethis::use_data(big_example, overwrite = TRUE)
 # big_example_result <- remove_false_pos(big_example)
 # usethis::use_data(big_example_result, overwrite = TRUE)
 
+# For checking which were set to zero, running this once
+big_example_zeros <- which_set_to_zero(big_example, big_example_result)
+usethis::use_data(big_example_zeros, overwrite = TRUE)
+
 
 # Do same for small example
 
@@ -46,7 +50,6 @@ usethis::use_data(small_example_result, overwrite = TRUE)
 
 # For checking which were set to zero:
 
-small_example_zeros <- which_set_to_zero(small_example, remove_false_pos(small_example))
-
+small_example_zeros <- which_set_to_zero(small_example, small_example_result)
 usethis::use_data(small_example_zeros, overwrite = TRUE)
 
