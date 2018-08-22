@@ -159,8 +159,8 @@ big_set_to_zero <- which_set_to_zero(big_example, big_removed)
 knitr::kable(big_set_to_zero)
 ```
 
+**To test sensitivity to** $\alpha$, **do as above but just plot the results**
 
-At some point:
 
 ## Figures
 
