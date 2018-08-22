@@ -66,16 +66,38 @@ That used the default value of 0.2 for the parameter alpha (yes??).....
 The more realistic `big_example` has ** mock samples and ** non-mock samples,
 with ...
 
-```{r, echo=TRUE, results='asis'}
+```{r, echo=TRUE, results='asis', eval=FALSE}
+big_example
+```
+
+```{r, echo=FALSE, results='asis'}
 knitr::kable(big_example)
 ```
 
 To remove the false positives:
 
-```{r, echo=TRUE, results='asis'}
+```{r, echo=TRUE, results='asis', eval=FALSE}
+big_removed <- remove_false_pos(big_example)
+big_removed
+```
+
+```{r, echo=FALSE, results='asis'}
 big_removed <- remove_false_pos(big_example)
 knitr::kable(big_removed)
 ```
+
+And again, to see which reads were set to zero use `which_set_to_zero()`:
+
+```{r, echo=TRUE, results='asis', eval=FALSE}
+big_set_to_zero <- which_set_to_zero(big_example, big_removed)
+big_set_to_zero
+```
+
+```{r, echo=FALSE, results='asis'}
+big_set_to_zero <- which_set_to_zero(big_example, big_removed)
+knitr::kable(big_set_to_zero)
+```
+
 
 ## Styles
 
