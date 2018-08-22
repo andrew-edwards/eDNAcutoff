@@ -1,9 +1,9 @@
-##' Show which reads were set to zero
+##' @title Show which reads were set to zero
 ##'
-##' Subtracts the result of remove_false_pos(original) [already done]
+##' @description Subtracts the result of remove_false_pos(original) [already done]
 ##' from original, which has to be done through this function which takes care
 ##' of the first column containing characters (the word 'mock').
-##' @title
+##'
 ##' @param original Original tibble data frame of numbers of reads.
 ##' @param result Resulting tibble from doing remove_false_pos(original).
 ##' @return A tibble showing which of the original positive reads were set to zero.

@@ -1,8 +1,8 @@
-##' Removes suspected false positives from a data frame
+##' @title Removes suspected false positives from a data frame
 ##'
-##' Removes suspected false positives from a data frame of numbers of reads
+##' @description Removes suspected false positives from a data frame of numbers of reads
 ##' from machine fragments of DNA that match each species in each sample.
-##' @title Maybe it goes here
+##'
 ##' @param data A tibble (table data frame, using dplyr) consisting of each row
 ##' representing a sample with values indicating the number of reads of each
 ##' species, with species represented by columns. The first row represents a
@@ -11,13 +11,14 @@
 ##' called 'mock'), next column is the category (if category == TRUE) which
 ##' gets removed for this function, next mN columns are reads of mock species,
 ##' and the remaining columns are reads of non-mock species.
+##'
 ##' @param mN Total number of mock species.
 ##' @param category TRUE if second column is a category column, FALSE if there
 ##' is no category column.
 ##' @param tol Tolerance for keeping potential false positive reads -- a number
 ##' of reads is only declared to be a false positive if it is less than 'tol'
-##' proportion of the maximum number of reads of that speces across all samples.
-##' @param ...
+##' proportion of the maximum number of reads of that species across all samples.
+##' @param ... Additional arguments.
 ##' @return A tibble with susepcted false positive reads set to 0.
 ##' @author Andrew Edwards
 ##' @export
