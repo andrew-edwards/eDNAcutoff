@@ -24,19 +24,37 @@ terminology*. The first column identifies the sample, and remaining columns are
 m1, m2, m3 and m4 for the four mock species, and 1, 2 and 3 for the non-mock species.
 Corresponding entries are the number of reads of each species in each sample.
 
-```{r, echo=TRUE, results='asis'}
-knitr::kable(small_example)      # kable() is just to display the result for this vignette
+
+```{r, echo=TRUE, results='asis', eval=FALSE}
+small_example
+```
+
+```{r, echo=FALSE, results='asis'}
+# kable() is to display the results for vignette, but the chunk above is what you
+#  would run in command line. Thus most chunks here are repeated to format the output.
+knitr::kable(small_example)      
 ```
 
 To remove the false positives use the function `remove_false_pos()`:
 
-```{r, echo=TRUE, results='asis'}
+```{r, echo=TRUE, results='asis', eval=FALSE}
+small_removed <- remove_false_pos(small_example)
+small_removed
+```
+
+```{r, echo=FALSE, results='asis'}
 small_removed <- remove_false_pos(small_example)
 knitr::kable(small_removed)
 ```
 
 To see which reads were set to zero use `which_set_to_zero()`:
-```{r, echo=TRUE, results='asis'}
+
+```{r, echo=TRUE, results='asis', eval=FALSE}
+small_set_to_zero <- which_set_to_zero(small_example, small_removed)
+small_set_to_zero
+```
+
+```{r, echo=FALSE, results='asis'}
 small_set_to_zero <- which_set_to_zero(small_example, small_removed)
 knitr::kable(small_set_to_zero)
 ```
