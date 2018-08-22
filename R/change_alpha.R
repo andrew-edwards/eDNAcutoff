@@ -23,12 +23,12 @@ change_alpha = function(data, alpha.vec = seq(0, 1, 0.1), mN = 4) {
   for(i in 1:N)
     {
       out.list[[i]] = remove_false_pos(data, mN = mN, alpha = alpha.vec[i])
-      diff = which_set_to_zero(input, out.list[[i]])
+      diff = which_set_to_zero(data, out.list[[i]])
 
       num.removed[i] = sum(as.vector(diff) > 0,
                            na.rm = TRUE)    # CHECK doesn't give warnings
-      mock.sp.out = out.list[[i]][2:dim(out.list[[i]])[1], 2:5]   # just mock species in non-mock
-        #  samples **hard-wired, move into function
+      mock.sp.out = out.list[[i]][2:dim(out.list[[i]])[1], 2:(mN + 1)]
+        # just mock species in non-mock samples. **assumes one mock sample
       # num.mock.sp.removed[i] = sum(as.vector(mock.sp.rem) > 0)
       num.mock.sp.left[i] = sum(as.vector(mock.sp.out > 0))
       num.samp.rem.with.mock.sp[i] = sum(rowSums(mock.sp.out) > 0)
