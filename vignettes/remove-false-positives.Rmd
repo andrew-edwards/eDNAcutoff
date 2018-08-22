@@ -28,18 +28,17 @@ Corresponding entries are the number of reads of each species in each sample.
 knitr::kable(small_example)      # kable() is just to display the result for this vignette
 ```
 
-To remove the false positives use the function `remove_false_pos`:
+To remove the false positives use the function `remove_false_pos()`:
 
 ```{r, echo=TRUE, results='asis'}
 small_removed <- remove_false_pos(small_example)
 knitr::kable(small_removed)
 ```
 
-To see which reads were set to zero:
-```{r, echo=TRUE, results='asis', eval=FALSE}
-## DOESN'T RUN - see Issue 4ish.
-## small_set_zero <- small_example - small_removed
-## knitr::kable(small_set_zero)
+To see which reads were set to zero use `which_set_to_zero()`:
+```{r, echo=TRUE, results='asis'}
+small_set_to_zero <- which_set_to_zero(small_example, small_removed)
+knitr::kable(small_set_to_zero)
 ```
 
 That used the default value of 0.2 for the parameter alpha (yes??).....
