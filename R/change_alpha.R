@@ -10,7 +10,7 @@
 ##'    num.mock.sp.left: ***
 ##'    num.samp.with.mock: ***
 ##' @author Andrew Edwards
-change_alpha = function(data, alpha.vec = seq(0, 1, 0.2)) {
+change_alpha = function(data, alpha.vec = seq(0, 1, 0.1)) {
 
   N <- length(alpha.vec)
   out.list = list()       # Will be a list of dataframes, each being the result for
@@ -26,7 +26,7 @@ change_alpha = function(data, alpha.vec = seq(0, 1, 0.2)) {
 
       num.removed[i] = sum(as.vector(diff) > 0,
                            na.rm = TRUE)    # CHECK doesn't give warnings
-      mock.sp.out = out.list[[ii]][2:dim(out.list[[i]])[1], 2:5]   # just mock species in non-mock
+      mock.sp.out = out.list[[i]][2:dim(out.list[[i]])[1], 2:5]   # just mock species in non-mock
         #  samples **hard-wired, move into function
       # num.mock.sp.removed[i] = sum(as.vector(mock.sp.rem) > 0)
       num.mock.sp.left[i] = sum(as.vector(mock.sp.out > 0))
