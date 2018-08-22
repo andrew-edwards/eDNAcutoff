@@ -15,8 +15,8 @@
 ##' @param mN Total number of mock species.
 ##' @param category TRUE if second column is a category column, FALSE if there
 ##' is no category column.
-##' @param tol Tolerance for keeping potential false positive reads -- a number
-##' of reads is only declared to be a false positive if it is less than 'tol'
+##' @param alpha Tolerance for keeping potential false positive reads -- a number
+##' of reads is only declared to be a false positive if it is less than 'alpha'
 ##' proportion of the maximum number of reads of that species across all samples.
 ##' @param ... Additional arguments.
 ##' @return A tibble with susepcted false positive reads set to 0.
@@ -24,7 +24,7 @@
 ##' @export
 ##' @examples
 ##'
-remove_false_pos = function(data, mN=4, category = FALSE, tol = 0.2, ...) {
+remove_false_pos = function(data, mN=4, category = FALSE, alpha = 0.2, ...) {
   if(class(data)[1] != "tbl_df") stop("First argument needs to be a tibble dataframe.")
   if(!("mock" %in% data$Sample)) stop("Need a mock sample.")
 
@@ -68,7 +68,7 @@ remove_false_pos = function(data, mN=4, category = FALSE, tol = 0.2, ...) {
       for(j in 2:dim(output)[2]) {
           output[i,j] = output[i,j] *
                         !( (output[i,j] <= threshold[i]) &
-                           (output[i,j] <= tol * max.species.read[j])
+                           (output[i,j] <= alpha * max.species.read[j])
                          )
       }
   }
