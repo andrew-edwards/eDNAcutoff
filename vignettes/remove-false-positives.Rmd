@@ -98,11 +98,18 @@ big_set_to_zero <- which_set_to_zero(big_example, big_removed)
 knitr::kable(big_set_to_zero)
 ```
 
+
+At some point:
+
 ## Figures
 
 The figure sizes have been customised so that you can easily put two images side-by-side. 
 
 ```{r, fig.show='hold'}
+#plot(tolerance, num.removed,
+#     xlab = "Tolerance level",
+#     ylab = "Number of suspected false positives removed")
+#points(tolerance, num.mock.sp.left, col="red")
 plot(1:10)
 plot(10:1)
 ```

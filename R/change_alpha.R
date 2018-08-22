@@ -1,8 +1,9 @@
-##' @title Loops over values of alpha
+##' @title Loops over values of alpha -- **needs tidying up**
 ##'
 ##' @description Removes false positives for various values of the tolerance parameter alpha
 ##' @param data As for remove_false_pos()
 ##' @param alpha.vec Vector of alpha (tolerance) values over which to run remove_false_pos().
+##' @param mN Total number of mock species.
 ##' @return List consisting of:
 ##'    ***:  list of dataframes, one for each result of the corresponding
 ##'    value of alpha;
@@ -10,7 +11,7 @@
 ##'    num.mock.sp.left: ***
 ##'    num.samp.with.mock: ***
 ##' @author Andrew Edwards
-change_alpha = function(data, alpha.vec = seq(0, 1, 0.1)) {
+change_alpha = function(data, alpha.vec = seq(0, 1, 0.1), mN = 4) {
 
   N <- length(alpha.vec)
   out.list = list()       # Will be a list of dataframes, each being the result for
@@ -21,7 +22,7 @@ change_alpha = function(data, alpha.vec = seq(0, 1, 0.1)) {
 
   for(i in 1:N)
     {
-      out.list[[i]] = remove_false_pos(data, mT=4, alpha = alpha.vec[i])
+      out.list[[i]] = remove_false_pos(data, mN = mN, alpha = alpha.vec[i])
       diff = which_set_to_zero(input, out.list[[i]])
 
       num.removed[i] = sum(as.vector(diff) > 0,
