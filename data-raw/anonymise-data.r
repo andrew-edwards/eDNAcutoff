@@ -43,3 +43,10 @@ usethis::use_data(small_example, overwrite = TRUE)
 small_example_result <- readr::read_csv("data-raw/data_manual_test_result.csv")
 
 usethis::use_data(small_example_result, overwrite = TRUE)
+
+# For checking which were set to zero:
+
+small_example_zeros <- which_set_to_zero(small_example, remove_false_pos(small_example))
+
+usethis::use_data(small_example_zeros, overwrite = TRUE)
+
