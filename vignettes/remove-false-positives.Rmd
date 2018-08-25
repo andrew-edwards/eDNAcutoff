@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 The object `small_example` has one mock sample and three non-mock samples, with four
 mock species in the mock sample and three non-mock species. *Update if change
 terminology*. The first column identifies the sample, and remaining columns are
-m1, m2, m3 and m4 for the four mock species, and 1, 2 and 3 for the non-mock species.
+a1, a2, a3 and a4 for the four mock species, and 1, 2 and 3 for the non-mock species.
 Corresponding entries are the number of reads of each species in each sample.
 
 
