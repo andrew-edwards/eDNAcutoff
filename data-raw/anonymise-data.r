@@ -18,7 +18,9 @@ usethis::use_data(big_example, overwrite = TRUE)
 
 # Running this once to create test result, change by hand if necessary (though can't as not .csv - Issue #)
 # big_example_result <- remove_false_pos(big_example)
-# usethis::use_data(big_example_result, overwrite = TRUE)
+# readr::write_csv(big_example_result, "data-raw/big_example_result.csv")  # run once to create, get Davon to manually check, and then edit the .csv file if the result should changed
+big_example_result <- readr::read_csv("data-raw/big_example_result.csv")
+usethis::use_data(big_example_result, overwrite = TRUE)
 
 # For checking which were set to zero, running this once
 big_example_zeros <- which_set_to_zero(big_example, big_example_result)
