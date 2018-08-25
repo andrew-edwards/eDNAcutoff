@@ -10,13 +10,13 @@ big_example <- dplyr::filter(big_example, Category_Sample_blank != "b") %>%
     dplyr::select(-Category_Sample_blank)
 
 # Anonymise and save
-names(big_example) <- c("Sample", "m1", "m2", "m3", "m4",
+names(big_example) <- c("Sample", "a1", "a2", "a3", "a4",
                         1:(length(names(big_example))-5))
 big_example$Sample = c("mock", 1:(length(big_example$Sample)-1))
 
 usethis::use_data(big_example, overwrite = TRUE)
 
-# Running this once to create test result
+# Running this once to create test result, change by hand if necessary (though can't as not .csv - Issue #)
 # big_example_result <- remove_false_pos(big_example)
 # usethis::use_data(big_example_result, overwrite = TRUE)
 
@@ -34,14 +34,14 @@ small_example <- readr::read_csv("data-raw/data_manual_test.csv",
 small_example <- dplyr::select(small_example, -Category_Sample_blank)
 
 # Anonymise and example
-names(small_example) <- c("Sample", "m1", "m2", "m3", "m4",
+names(small_example) <- c("Sample", "a1", "a2", "a3", "a4",
                         1:(length(names(small_example))-5))
 small_example$Sample <- c("mock", 1:(length(small_example$Sample)-1))
 
 usethis::use_data(small_example, overwrite = TRUE)
 
 # Save here to then manually edit for expected result after using
-#  remove_false_pos().  So if re-run this line then have to manually edit again:
+#  remove_false_pos().  So if anything changes have to manually edit .csv again:
 # readr::write_csv(small_example, "data-raw/data_manual_test_result.csv")
 
 small_example_result <- readr::read_csv("data-raw/data_manual_test_result.csv")

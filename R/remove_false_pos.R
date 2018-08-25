@@ -9,10 +9,10 @@
 ##' mock sample and remaining rows are real samples. The first column must be
 ##' called Sample and gives the name of the samples (mock sample must be
 ##' called 'mock'), next column is the category (if category == TRUE) which
-##' gets removed for this function, next mN columns are reads of mock species,
+##' gets removed for this function, next aT columns are reads of mock species,
 ##' and the remaining columns are reads of non-mock species.
 ##'
-##' @param mN Total number of mock species.
+##' @param aT Total number of mock species.
 ##' @param category TRUE if second column is a category column, FALSE if there
 ##' is no category column.
 ##' @param alpha Tolerance for keeping potential false positive reads -- a number
@@ -24,7 +24,7 @@
 ##' @export
 ##' @examples
 ##'
-remove_false_pos = function(data, mN=4, category = FALSE, alpha = 0.2, ...) {
+remove_false_pos = function(data, aT=4, category = FALSE, alpha = 0.2, ...) {
   if(class(data)[1] != "tbl_df") stop("First argument needs to be a tibble dataframe.")
   if(!("mock" %in% data$Sample)) stop("Need a mock sample.")
 
@@ -33,11 +33,11 @@ remove_false_pos = function(data, mN=4, category = FALSE, alpha = 0.2, ...) {
 
   ncol = dim(data.use)[2]
 
-  # names of the mN mock species:
-  mock.spec.names = names(data.use)[2:(2+mN-1)]
+  # names of the aT mock species:
+  mock.spec.names = names(data.use)[2:(2+aT-1)]
 
   # names of the non-mock species:
-  non.mock.spec.names = names(data.use)[(2+mN):ncol]
+  non.mock.spec.names = names(data.use)[(2+aT):ncol]
 
   non.mock.samples = dplyr::filter(data.use, Sample != "mock")
   non.mock.samples.mock.spec = dplyr::select(non.mock.samples, mock.spec.names)
