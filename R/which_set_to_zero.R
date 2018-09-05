@@ -8,6 +8,7 @@
 ##' @param result Resulting tibble from doing remove_false_pos(original).
 ##' @return A tibble showing which of the original positive reads were set to zero.
 ##' @author Andrew Edwards
+##' @export
 which_set_to_zero = function(original, result) {
   if(class(original)[1] != "tbl_df") stop("First argument needs to be a tibble dataframe.")
   if(class(result)[1] != "tbl_df") stop("First argument needs to be a tibble dataframe.")
