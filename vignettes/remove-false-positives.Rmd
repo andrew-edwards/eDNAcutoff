@@ -25,7 +25,6 @@ terminology*. The first column identifies the sample, and remaining columns are
 a1, a2, a3 and a4 for the four mock species, and 1, 2 and 3 for the non-mock species.
 Corresponding entries are the number of reads of each species in each sample.
 
-
 ```{r, echo=TRUE, results='asis', eval=FALSE}
 small_example
 ```
