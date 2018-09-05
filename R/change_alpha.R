@@ -11,6 +11,7 @@
 ##'    num.mock.sp.left: ***
 ##'    num.samp.with.mock: ***
 ##' @author Andrew Edwards
+##' @export
 change_alpha = function(data, alpha.vec = seq(0, 1, 0.1), aT = 4) {
 
   N <- length(alpha.vec)
