@@ -20,15 +20,14 @@ knitr::opts_chunk$set(
 ## Small example
 
 The object `small_example` has one mock sample and three non-mock samples, with four
-mock species in the mock sample and three non-mock species. *Update if change
-terminology*. The first column identifies the sample, and remaining columns are
-a1, a2, a3 and a4 for the four mock species, and 1, 2 and 3 for the non-mock species.
+absent species in the mock sample and three non-absent species. The first column
+identifies the sample, and remaining columns are
+a1, a2, a3 and a4 for the four absent species, and 1, 2 and 3 for the non-absent species.
 Corresponding entries are the number of reads of each species in each sample.
 
 ```{r}
 library(eDNAcutoff)
 ```
-
 
 ```{r, echo=TRUE, results='asis', eval=FALSE}
 small_example
@@ -36,7 +35,8 @@ small_example
 
 ```{r, echo=FALSE, results='asis'}
 # kable() is to display the results for vignette, but the chunk above is what you
-#  would run in command line. Thus most chunks here are repeated to format the output.
+#  would run in command line. Thus most chunks here are repeated to format the output
+#  better in the vignette.
 knitr::kable(small_example)      
 ```
 
@@ -90,12 +90,12 @@ plot(alpha_values, small_sens_alpha$num.zeroed,
 ```
 
 
-- the number of mock species left in non-mock samples (**check**)
+- the number of absent species left in non-mock samples (**check**)
 ```{r, echo=TRUE}
 small_sens_alpha$num.mock.sp.left
 ```
 
-- the number of non-mock (check**?) samples remaining with non-mock species
+- the number of non-mock (check**?) samples remaining with non-absent species
 ```{r, echo=TRUE}
 small_sens_alpha$num.samp.rem.with.mock.sp
 ```
@@ -136,7 +136,7 @@ $\alpha=0.6$ in the figure).
 
 ## Big example
 
-The more realistic `big_example` has ** mock samples and ** non-mock samples,
+The more realistic `big_example` has XXX mock samples and XXX non-mock samples,
 with ...
 
 ```{r, echo=TRUE, results='asis', eval=FALSE}
@@ -171,7 +171,7 @@ big_set_to_zero <- which_set_to_zero(big_example, big_removed)
 knitr::kable(big_set_to_zero)
 ```
 
-**To test sensitivity to** $\alpha$, **do as above but just plot the results**
+**To test sensitivity to** $\alpha$, **do as above (but just plot the results here)**
 
 As above, to test sensitivity to $\alpha$:
 
@@ -192,12 +192,12 @@ plot(alpha_values, big_sens_alpha$num.zeroed,
      ylab = "Number of reads set to zero")
 ```
 
-- the number of mock species left in non-mock samples (**check**)
+- the number of absent species left in non-mock samples (**check**)
 ```{r, echo=TRUE}
 big_sens_alpha$num.mock.sp.left
 ```
 
-- the number of non-mock (check**?) samples remaining with non-mock species
+- the number of non-mock samples remaining with non-absent species
 ```{r, echo=TRUE}
 big_sens_alpha$num.samp.rem.with.mock.sp
 ```
