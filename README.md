@@ -6,6 +6,11 @@ Not operational yet. Based on a manuscript in preparation.
 
 Davon and Ben - you should be able to install and play around with it (providing the badge above says 'build' and then 'passing' in green, else it won't install). 
 
+### Vignette
+
+The vignette showing examples of the functions is available [here](http://htmlpreview.github.io/?https://github.com/andrew-edwards/eDNAcutoff/blob/master/inst/doc/remove-false-positives.html), and directly in the package (see below).
+
+
 ### To install from GitHub
 
 You need the package `devtools`, so you need to install it once:
