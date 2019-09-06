@@ -34,7 +34,7 @@ small_set_to_zero <- which_set_to_zero(small_example, small_removed)
 knitr::kable(small_set_to_zero)
 
 ## ---- echo=TRUE, results='asis'------------------------------------------
-alpha_values <- seq(0, 1, 0.1)
+alpha_values <- c(0.01, seq(0.1, 1, 0.1))
 small_sens_alpha <- change_alpha(small_example, alpha_vec = alpha_values)
 
 ## ---- echo=TRUE----------------------------------------------------------

@@ -72,7 +72,7 @@ of $\alpha$ values:
 
 
 ```{r, echo=TRUE, results='asis'}
-alpha_values <- seq(0, 1, 0.1)
+alpha_values <- c(0.01, seq(0.1, 1, 0.1))
 small_sens_alpha <- change_alpha(small_example, alpha_vec = alpha_values)
 ```
 
