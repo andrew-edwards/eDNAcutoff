@@ -1,0 +1,209 @@
+---
+title: "remove-false-positives"
+author: "Andrew Edwards"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{remove-false-positives}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 6
+)
+```
+
+## Small example
+
+The object `small_example` has one mock sample and three non-mock samples, with four
+absent species in the mock sample and three non-absent species. The first column
+identifies the sample, and remaining columns are
+a1, a2, a3 and a4 for the four absent species, and 1, 2 and 3 for the non-absent species.
+Corresponding entries are the number of reads of each species in each sample.
+
+```{r}
+library(eDNAcutoff)
+```
+
+```{r, echo=TRUE, results='asis', eval=FALSE}
+small_example
+```
+
+```{r, echo=FALSE, results='asis'}
+# kable() is to display the results for vignette, but the chunk above is what you
+#  would run in command line. Thus most chunks here are repeated to format the output
+#  better in the vignette.
+knitr::kable(small_example)
+```
+
+To remove the false positives use the function `remove_false_pos()`:
+
+```{r, echo=TRUE, results='asis', eval=FALSE}
+small_removed <- remove_false_pos(small_example)
+small_removed
+```
+
+```{r, echo=FALSE, results='asis'}
+small_removed <- remove_false_pos(small_example)
+knitr::kable(small_removed)
+```
+
+To see which reads were set to zero use `which_set_to_zero()`:
+
+```{r, echo=TRUE, results='asis', eval=FALSE}
+small_set_to_zero <- which_set_to_zero(small_example, small_removed)
+small_set_to_zero
+```
+
+```{r, echo=FALSE, results='asis'}
+small_set_to_zero <- which_set_to_zero(small_example, small_removed)
+knitr::kable(small_set_to_zero)
+```
+
+That used the default value of 0.2 for the parameter $\alpha$, which is the
+tolerance for ...**add text**
+
+To test sensitivity to $\alpha$ use the function `change_alpha()` for a vector
+of $\alpha$ values:
+
+
+```{r, echo=TRUE, results='asis'}
+alpha_values <- seq(0, 1, 0.1)
+small_sens_alpha <- change_alpha(small_example, alpha_vec = alpha_values)
+```
+
+which returns a list containing:
+
+- the number of reads set to zero (for each value of `alpha_values`)
+
+```{r, echo=TRUE}
+small_sens_alpha$num_zeroed
+plot(alpha_values, small_sens_alpha$num_zeroed,
+     type = "o",
+     col = "red",
+     xlab = "Tolerance level",
+     ylab = "Number of reads set to zero")
+```
+
+
+- the number of absent species left in non-mock samples (**check**)
+```{r, echo=TRUE}
+small_sens_alpha$num_mock_sp_left
+```
+
+- the number of non-mock (check**?) samples remaining with non-absent species
+```{r, echo=TRUE}
+small_sens_alpha$num_samp_rem_with_mock_sp
+```
+
+- a data frame (tibble) for each value of `alpha_values`,
+for example
+
+```{r, echo=TRUE}
+alpha_values[6]
+```
+
+```{r, echo=TRUE, eval=FALSE}
+small_sens_alpha$out_list[[6]]
+```
+
+```{r, echo=FALSE}
+knitr::kable(small_sens_alpha$out_list[[6]])
+```
+
+and
+
+
+```{r, echo=TRUE}
+alpha_values[7]
+```
+
+```{r, echo=TRUE, eval=FALSE}
+small_sens_alpha$out_list[[7]]
+```
+
+```{r, echo=FALSE}
+knitr::kable(small_sens_alpha$out_list[[7]])
+```
+
+Note how the read of 10 for sample 2 and species 2 gets kept for $\alpha=0.5$
+but zeroed for $\alpha=0.6$ (corresponding to the red line increasing up at
+$\alpha=0.6$ in the figure).
+
+## Big example
+
+The more realistic `big_example` has XXX mock samples and XXX non-mock samples,
+with ...
+
+```{r, echo=TRUE, results='asis', eval=FALSE}
+big_example
+```
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(big_example)
+```
+
+To remove the false positives:
+
+```{r, echo=TRUE, results='asis', eval=FALSE}
+big_removed <- remove_false_pos(big_example)
+big_removed
+```
+
+```{r, echo=FALSE, results='asis'}
+big_removed <- remove_false_pos(big_example)
+knitr::kable(big_removed)
+```
+
+And again, to see which reads were set to zero use `which_set_to_zero()`:
+
+```{r, echo=TRUE, results='asis', eval=FALSE}
+big_set_to_zero <- which_set_to_zero(big_example, big_removed)
+big_set_to_zero
+```
+
+```{r, echo=FALSE, results='asis'}
+big_set_to_zero <- which_set_to_zero(big_example, big_removed)
+knitr::kable(big_set_to_zero)
+```
+
+**To test sensitivity to** $\alpha$, **do as above (but just plot the results here)**
+
+As above, to test sensitivity to $\alpha$:
+
+```{r, echo=TRUE, results='asis'}
+big_sens_alpha <- change_alpha(big_example, alpha_vec = alpha_values)
+```
+
+which returns a list containing:
+
+- the number of reads set to zero (for each value of `alpha_values`)
+
+```{r, echo=TRUE}
+big_sens_alpha$num_zeroed
+plot(alpha_values, big_sens_alpha$num_zeroed,
+     type = "o",
+     col = "red",
+     xlab = "Tolerance level",
+     ylab = "Number of reads set to zero")
+```
+
+- the number of absent species left in non-mock samples (**check**)
+```{r, echo=TRUE}
+big_sens_alpha$num_mock_sp_left
+```
+
+- the number of non-mock samples remaining with non-absent species
+```{r, echo=TRUE}
+big_sens_alpha$num_samp_rem_with_mock_sp
+```
+
+- a data frame (tibble) for each value of `alpha_values` available as
+  `big_sens_alpha$out_list[[6]]` etc. (not shown).
+
+**TODO** Seems surprising that the big data set is fairly insensitive to
+$\alpha$ - look into somewhat manually and check. And set up a `test()`.
