@@ -16,7 +16,7 @@ change_alpha = function(data, alpha.vec = seq(0, 1, 0.1), aT = 4) {
 
   N <- length(alpha.vec)
   out.list = list()       # Will be a list of dataframes, each being the result for
-                        #  the corresponding value of alpha.vec
+                          #  the corresponding value of alpha.vec
   num.zeroed = vector(length = N)  # Try vector(length = length(alpha.vec))
   num.mock.sp.left = vector(length = N)
   num.samp.rem.with.mock.sp = vector(length = N)
