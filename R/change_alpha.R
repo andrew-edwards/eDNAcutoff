@@ -3,7 +3,7 @@
 ##' @description Removes false positives for various values of the tolerance parameter alpha
 ##' @param data As for remove_false_pos()
 ##' @param alpha_vec Vector of alpha (tolerance) values over which to run remove_false_pos().
-##' @param aT Total number of absent species.
+##' @param aT Total number of control species.
 ##' @return List consisting of:
 ##'    ***:  list of dataframes, one for each result of the corresponding
 ##'    value of alpha;
@@ -29,7 +29,7 @@ change_alpha = function(data, alpha_vec = seq(0, 1, 0.1), aT = 4) {
       num_zeroed[i] = sum(as.vector(diff) > 0,
                            na.rm = TRUE)    # CHECK doesn't give warnings
       mock_sp_out = out_list[[i]][2:dim(out_list[[i]])[1], 2:(aT + 1)]
-        # just absent species in non-mock samples. **assumes one mock sample
+        # just control species in non-mock samples. **assumes one mock sample
       # num_mock_sp_zeroed[i] = sum(as.vector(mock_sp_rem) > 0)
       num_mock_sp_left[i] = sum(as.vector(mock_sp_out > 0))
       num_samp_rem_with_mock_sp[i] = sum(rowSums(mock_sp_out) > 0)

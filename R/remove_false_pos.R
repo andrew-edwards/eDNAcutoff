@@ -9,10 +9,10 @@
 ##' mock sample and remaining rows are real samples. The first column must be
 ##' called Sample and gives the name of the samples (mock sample must be
 ##' called 'mock'), next column is the category (if category == TRUE) which
-##' gets removed for this function, next aT columns are reads of absent species,
-##' and the remaining columns are reads of non-absent species.
+##' gets removed for this function, next aT columns are reads of control species,
+##' and the remaining columns are reads of non-control species.
 ##'
-##' @param aT Total number of absent species.
+##' @param aT Total number of control species.
 ##' @param category TRUE if second column is a category column, FALSE if there
 ##' is no category column.
 ##' @param alpha Tolerance for keeping potential false positive reads -- a number
@@ -33,10 +33,10 @@ remove_false_pos = function(data, aT=4, category = FALSE, alpha = 0.2, ...) {
 
   ncol = dim(data_use)[2]
 
-  # names of the aT absent species:
+  # names of the aT control species:
   mock_spec_names = names(data_use)[2:(2+aT-1)]
 
-  # names of the non-absent species:
+  # names of the non-control species:
   non_mock_spec_names = names(data_use)[(2+aT):ncol]
 
   non_mock_samples = dplyr::filter(data_use, Sample != "mock")
@@ -49,7 +49,7 @@ remove_false_pos = function(data, aT=4, category = FALSE, alpha = 0.2, ...) {
 
   imax = dplyr::pull(non_mock_samples[imax_num, "Sample"])   # name of imax row
   # imax as per write up (row name of non-mock sample that has the maximum
-  #  number of reads of any of the absent species), but could be more than one row.
+  #  number of reads of any of the control species), but could be more than one row.
   if(length(imax) > 1) stop("Not implemented for imax > 1 yet.")
 
   imax_row_sum = sum(dplyr::select( dplyr::filter(data_use, Sample == imax),

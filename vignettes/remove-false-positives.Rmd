@@ -20,9 +20,9 @@ knitr::opts_chunk$set(
 ## Small example
 
 The object `small_example` has one mock sample and three non-mock samples, with four
-absent species in the mock sample and three non-absent species. The first column
+control species in the mock sample and three non-control species. The first column
 identifies the sample, and remaining columns are
-a1, a2, a3 and a4 for the four absent species, and 1, 2 and 3 for the non-absent species.
+a1, a2, a3 and a4 for the four control species, and 1, 2 and 3 for the non-control species.
 Corresponding entries are the number of reads of each species in each sample.
 
 ```{r}
@@ -90,12 +90,12 @@ plot(alpha_values, small_sens_alpha$num_zeroed,
 ```
 
 
-- the number of absent species left in non-mock samples (**check**)
+- the number of control species left in non-mock samples (**check**)
 ```{r, echo=TRUE}
 small_sens_alpha$num_mock_sp_left
 ```
 
-- the number of non-mock (check**?) samples remaining with non-absent species
+- the number of non-mock (check**?) samples remaining with non-control species
 ```{r, echo=TRUE}
 small_sens_alpha$num_samp_rem_with_mock_sp
 ```
@@ -192,12 +192,12 @@ plot(alpha_values, big_sens_alpha$num_zeroed,
      ylab = "Number of reads set to zero")
 ```
 
-- the number of absent species left in non-mock samples (**check**)
+- the number of control species left in non-mock samples (**check**)
 ```{r, echo=TRUE}
 big_sens_alpha$num_mock_sp_left
 ```
 
-- the number of non-mock samples remaining with non-absent species
+- the number of non-mock samples remaining with non-control species
 ```{r, echo=TRUE}
 big_sens_alpha$num_samp_rem_with_mock_sp
 ```
