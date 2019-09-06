@@ -43,7 +43,9 @@ plot(alpha_values, small_sens_alpha$num_zeroed,
      type = "o",
      col = "red",
      xlab = "Tolerance level",
-     ylab = "Number of reads set to zero")
+     ylab = "Number of reads set to zero",
+     ylim = c(0, max(small_sens_alpha$num_zeroed))
+    )
 
 ## ---- echo=TRUE----------------------------------------------------------
 small_sens_alpha$num_mock_sp_left
@@ -100,7 +102,9 @@ plot(alpha_values, big_sens_alpha$num_zeroed,
      type = "o",
      col = "red",
      xlab = "Tolerance level",
-     ylab = "Number of reads set to zero")
+     ylab = "Number of reads set to zero",
+     ylim = c(400, max(big_sens_alpha$num_zeroed))
+    )
 
 ## ---- echo=TRUE----------------------------------------------------------
 big_sens_alpha$num_mock_sp_left
