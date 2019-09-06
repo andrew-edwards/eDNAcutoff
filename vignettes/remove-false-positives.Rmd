@@ -207,6 +207,3 @@ big_sens_alpha$num_samp_rem_with_mock_sp
 
 **TODO** Seems surprising that the big data set is fairly insensitive to
 $\alpha$ - look into somewhat manually and check. And set up a `test()`.
-
-
-hello
