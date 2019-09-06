@@ -30,8 +30,8 @@ change_alpha = function(data, alpha_vec = seq(0, 1, 0.1), aT = 4) {
                            na.rm = TRUE)    # CHECK doesn't give warnings
       mock_sp_out = out_list[[i]][2:dim(out_list[[i]])[1], 2:(aT + 1)]
         # just absent species in non-mock samples. **assumes one mock sample
-      # num_mock_sp_zeroed[i] = sum(as_vector(mock_sp_rem) > 0)
-      num_mock_sp_left[i] = sum(as_vector(mock_sp_out > 0))
+      # num_mock_sp_zeroed[i] = sum(as.vector(mock_sp_rem) > 0)
+      num_mock_sp_left[i] = sum(as.vector(mock_sp_out > 0))
       num_samp_rem_with_mock_sp[i] = sum(rowSums(mock_sp_out) > 0)
     }
   return(list(out_list = out_list,
