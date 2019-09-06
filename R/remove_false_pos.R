@@ -28,47 +28,47 @@ remove_false_pos = function(data, aT=4, category = FALSE, alpha = 0.2, ...) {
   if(class(data)[1] != "tbl_df") stop("First argument needs to be a tibble dataframe.")
   if(!("mock" %in% data$Sample)) stop("Need a mock sample.")
 
-  data.use = data
-  if(category) { data.use = dplyr::select(data.use, -2) }
+  data_use = data
+  if(category) { data_use = dplyr::select(data_use, -2) }
 
-  ncol = dim(data.use)[2]
+  ncol = dim(data_use)[2]
 
   # names of the aT absent species:
-  mock.spec.names = names(data.use)[2:(2+aT-1)]
+  mock_spec_names = names(data_use)[2:(2+aT-1)]
 
   # names of the non-absent species:
-  non.mock.spec.names = names(data.use)[(2+aT):ncol]
+  non_mock_spec_names = names(data_use)[(2+aT):ncol]
 
-  non.mock.samples = dplyr::filter(data.use, Sample != "mock")
-  non.mock.samples.mock.spec = dplyr::select(non.mock.samples, mock.spec.names)
-  max.reads = max(non.mock.samples.mock.spec)
+  non_mock_samples = dplyr::filter(data_use, Sample != "mock")
+  non_mock_samples_mock_spec = dplyr::select(non_mock_samples, mock_spec_names)
+  max_reads = max(non_mock_samples_mock_spec)
 
-  max.row.col = which(non.mock.samples.mock.spec == max.reads, arr.ind=TRUE)
-  imax.num = max.row.col[,"row"]
-  # only refers to non.mock.samples
+  max_row_col = which(non_mock_samples_mock_spec == max_reads, arr_ind=TRUE)
+  imax_num = max_row_col[,"row"]
+  # only refers to non_mock_samples
 
-  imax = dplyr::pull(non.mock.samples[imax.num, "Sample"])   # name of imax row
+  imax = dplyr::pull(non_mock_samples[imax_num, "Sample"])   # name of imax row
   # imax as per write up (row name of non-mock sample that has the maximum
   #  number of reads of any of the absent species), but could be more than one row.
   if(length(imax) > 1) stop("Not implemented for imax > 1 yet.")
 
-  imax.row.sum = sum(dplyr::select( dplyr::filter(data.use, Sample == imax),
+  imax_row_sum = sum(dplyr::select( dplyr::filter(data_use, Sample == imax),
                                    -Sample))
 
-  P = max.reads / imax.row.sum
-  sample.total.reads = rowSums(data.use[, 2:ncol])
-  threshold = P * sample.total.reads
+  P = max_reads / imax_row_sum
+  sample_total_reads = rowSums(data_use[, 2:ncol])
+  threshold = P * sample_total_reads
 
-  max.species.read = c(NA, sapply(data.use[,2:ncol], max))
+  max_species_read = c(NA, sapply(data_use[,2:ncol], max))
 
-  output = data.use
+  output = data_use
 
   # Set the suspected false positives to zero.
   for(i in 1:dim(output)[1]) {
       for(j in 2:dim(output)[2]) {
           output[i,j] = output[i,j] *
                         !( (output[i,j] <= threshold[i]) &
-                           (output[i,j] <= alpha * max.species.read[j])
+                           (output[i,j] <= alpha * max_species_read[j])
                          )
       }
   }

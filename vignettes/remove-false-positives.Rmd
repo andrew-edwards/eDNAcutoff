@@ -37,7 +37,7 @@ small_example
 # kable() is to display the results for vignette, but the chunk above is what you
 #  would run in command line. Thus most chunks here are repeated to format the output
 #  better in the vignette.
-knitr::kable(small_example)      
+knitr::kable(small_example)
 ```
 
 To remove the false positives use the function `remove_false_pos()`:
@@ -81,8 +81,8 @@ which returns a list containing:
 - the number of reads set to zero (for each value of `alpha_values`)
 
 ```{r, echo=TRUE}
-small_sens_alpha$num.zeroed
-plot(alpha_values, small_sens_alpha$num.zeroed,
+small_sens_alpha$num_zeroed
+plot(alpha_values, small_sens_alpha$num_zeroed,
      type = "o",
      col = "red",
      xlab = "Tolerance level",
@@ -92,12 +92,12 @@ plot(alpha_values, small_sens_alpha$num.zeroed,
 
 - the number of absent species left in non-mock samples (**check**)
 ```{r, echo=TRUE}
-small_sens_alpha$num.mock.sp.left
+small_sens_alpha$num_mock_sp_left
 ```
 
 - the number of non-mock (check**?) samples remaining with non-absent species
 ```{r, echo=TRUE}
-small_sens_alpha$num.samp.rem.with.mock.sp
+small_sens_alpha$num_samp_rem_with_mock_sp
 ```
 
 - a data frame (tibble) for each value of `alpha_values`,
@@ -108,11 +108,11 @@ alpha_values[6]
 ```
 
 ```{r, echo=TRUE, eval=FALSE}
-small_sens_alpha$out.list[[6]]
+small_sens_alpha$out_list[[6]]
 ```
 
 ```{r, echo=FALSE}
-knitr::kable(small_sens_alpha$out.list[[6]])
+knitr::kable(small_sens_alpha$out_list[[6]])
 ```
 
 and
@@ -123,15 +123,15 @@ alpha_values[7]
 ```
 
 ```{r, echo=TRUE, eval=FALSE}
-small_sens_alpha$out.list[[7]]
+small_sens_alpha$out_list[[7]]
 ```
 
 ```{r, echo=FALSE}
-knitr::kable(small_sens_alpha$out.list[[7]])
+knitr::kable(small_sens_alpha$out_list[[7]])
 ```
 
 Note how the read of 10 for sample 2 and species 2 gets kept for $\alpha=0.5$
-but zeroed for $\alpha=0.6$ (corresponding to the red line increasing up at 
+but zeroed for $\alpha=0.6$ (corresponding to the red line increasing up at
 $\alpha=0.6$ in the figure).
 
 ## Big example
@@ -176,7 +176,7 @@ knitr::kable(big_set_to_zero)
 As above, to test sensitivity to $\alpha$:
 
 ```{r, echo=TRUE, results='asis'}
-big_sens_alpha <- change_alpha(big_example, alpha.vec = alpha_values)
+big_sens_alpha <- change_alpha(big_example, alpha_vec = alpha_values)
 ```
 
 which returns a list containing:
@@ -184,8 +184,8 @@ which returns a list containing:
 - the number of reads set to zero (for each value of `alpha_values`)
 
 ```{r, echo=TRUE}
-big_sens_alpha$num.zeroed
-plot(alpha_values, big_sens_alpha$num.zeroed,
+big_sens_alpha$num_zeroed
+plot(alpha_values, big_sens_alpha$num_zeroed,
      type = "o",
      col = "red",
      xlab = "Tolerance level",
@@ -194,16 +194,16 @@ plot(alpha_values, big_sens_alpha$num.zeroed,
 
 - the number of absent species left in non-mock samples (**check**)
 ```{r, echo=TRUE}
-big_sens_alpha$num.mock.sp.left
+big_sens_alpha$num_mock_sp_left
 ```
 
 - the number of non-mock samples remaining with non-absent species
 ```{r, echo=TRUE}
-big_sens_alpha$num.samp.rem.with.mock.sp
+big_sens_alpha$num_samp_rem_with_mock_sp
 ```
 
 - a data frame (tibble) for each value of `alpha_values` available as
-  `big_sens_alpha$out.list[[6]]` etc. (not shown).
+  `big_sens_alpha$out_list[[6]]` etc. (not shown).
 
-**TODO** Seems surprising that the big data set is fairly insensitive to 
+**TODO** Seems surprising that the big data set is fairly insensitive to
 $\alpha$ - look into somewhat manually and check. And set up a `test()`.
