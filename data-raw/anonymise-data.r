@@ -1,6 +1,7 @@
 # Anonymise the species and sample names in Davon's raw data and the simplified
 #  data set, and simplify Davon's data set (remove Category_Sample_blank column)
-#  and create examples.
+#  and create examples. Have run this once, be wary about re-running whole thing
+#  again - if do then check what changes.
 
 big_example <- readr::read_csv("data-raw/data_for_andy.csv",
                                comment="#")
@@ -55,3 +56,7 @@ usethis::use_data(small_example_result, overwrite = TRUE)
 small_example_zeros <- which_set_to_zero(small_example, small_example_result)
 usethis::use_data(small_example_zeros, overwrite = TRUE)
 
+# For testing change_alpha. Doing this here and then checking results by hand:
+
+small_example_change_alpha_result <- change_alpha(small_example)
+usethis::use_data(small_example_change_alpha_result, overwrite = TRUE)

@@ -21,9 +21,11 @@ and the remaining columns are reads of non-control species.}
 \item{category}{TRUE if second column is a category column, FALSE if there
 is no category column.}
 
-\item{alpha}{Tolerance for keeping potential false positive reads -- a number
-of reads is only declared to be a false positive if it is less than 'alpha'
-proportion of the maximum number of reads of that species across all samples.}
+\item{alpha}{Tolerance for keeping potential false positive reads to
+preserve detection of rare species. A number of reads is only declared to
+be a false positive if it is less than 'alpha' proportion of the maximum
+number of reads of that species across all samples. Must satisfy 0 < alpha
+<= 1. With alpha = 1 there is no consideration of rare species.}
 
 \item{...}{Additional arguments.}
 }

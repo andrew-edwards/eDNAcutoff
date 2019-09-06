@@ -4,20 +4,23 @@
 ##' from machine fragments of DNA that match each species in each sample.
 ##'
 ##' @param data A tibble (table data frame, using dplyr) consisting of each row
-##' representing a sample with values indicating the number of reads of each
-##' species, with species represented by columns. The first row represents a
-##' mock sample and remaining rows are real samples. The first column must be
-##' called Sample and gives the name of the samples (mock sample must be
-##' called 'mock'), next column is the category (if category == TRUE) which
-##' gets removed for this function, next aT columns are reads of control species,
-##' and the remaining columns are reads of non-control species.
+##'   representing a sample with values indicating the number of reads of each
+##'   species, with species represented by columns. The first row represents a
+##'   mock sample and remaining rows are real samples. The first column must be
+##'   called Sample and gives the name of the samples (mock sample must be
+##'   called 'mock'), next column is the category (if category == TRUE) which
+##'   gets removed for this function, next aT columns are reads of control species,
+##'   and the remaining columns are reads of non-control species.
 ##'
 ##' @param aT Total number of control species.
 ##' @param category TRUE if second column is a category column, FALSE if there
-##' is no category column.
-##' @param alpha Tolerance for keeping potential false positive reads -- a number
-##' of reads is only declared to be a false positive if it is less than 'alpha'
-##' proportion of the maximum number of reads of that species across all samples.
+##'   is no category column.
+##' @param alpha Tolerance for keeping potential false positive reads to
+##'   preserve detection of rare species. A number of reads is only declared to
+##'   be a false positive if it is less than 'alpha' proportion of the maximum
+##'   number of reads of that species across all samples. Must satisfy 0 < alpha
+##'   <= 1. With alpha = 1 there is no consideration of rare species.
+##'
 ##' @param ... Additional arguments.
 ##' @return A tibble with susepcted false positive reads set to 0.
 ##' @author Andrew Edwards
@@ -27,6 +30,7 @@
 remove_false_pos = function(data, aT=4, category = FALSE, alpha = 0.2, ...) {
   if(class(data)[1] != "tbl_df") stop("First argument needs to be a tibble dataframe.")
   if(!("mock" %in% data$Sample)) stop("Need a mock sample.")
+  stopifnot(alpha > 0, alpha <= 1)
 
   data_use = data
   if(category) { data_use = dplyr::select(data_use, -2) }

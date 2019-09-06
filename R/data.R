@@ -43,6 +43,20 @@
 #' @source From setting false positives to zero in `small_example`.
 "small_example_zeros"
 
+#' Expected result of running `change_alpha(small_example)`, for testing.
+#'
+#' Expected resulting list object, with **** update when update `change_alpha.R`.
+#'
+#' @format A tibble with 4 rows and 8 columns***TO UPDATE:
+#' \describe{
+#'   \item{Sample}{Either 'mock', or 1, 2, 3, labelling the samples}
+#'   \item{a1, a2, a3, a4}{Reads of control species a1, a2, a3 and a4}
+#'   \item{`1`, `2` `3`}{Reads of non-control species 1, 2, 3}
+#' }
+#' @source From setting false positives to zero in `small_example` for a range
+#'   of alphas CHECK MANUALLY.
+"small_example_change_alpha_result"
+
 
 #' Big example data set.
 #'

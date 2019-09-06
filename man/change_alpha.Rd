@@ -4,7 +4,7 @@
 \alias{change_alpha}
 \title{Loops over values of alpha -- **needs tidying up**}
 \usage{
-change_alpha(data, alpha_vec = seq(0, 1, 0.1), aT = 4)
+change_alpha(data, alpha_vec = c(0.01, seq(0.1, 1, 0.1)), aT = 4)
 }
 \arguments{
 \item{data}{As for remove_false_pos()}

@@ -12,12 +12,12 @@
 ##'    num_samp_with_mock: ***
 ##' @author Andrew Edwards
 ##' @export
-change_alpha = function(data, alpha_vec = seq(0, 1, 0.1), aT = 4) {
+change_alpha = function(data, alpha_vec = c(0.01, seq(0.1, 1, 0.1)), aT = 4) {
 
   N <- length(alpha_vec)
   out_list = list()       # Will be a list of dataframes, each being the result for
                           #  the corresponding value of alpha_vec
-  num_zeroed = vector(length = N)  # Try vector(length = length(alpha_vec))
+  num_zeroed = vector(length = N)
   num_mock_sp_left = vector(length = N)
   num_samp_rem_with_mock_sp = vector(length = N)
 
