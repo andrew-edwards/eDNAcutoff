@@ -43,7 +43,7 @@ remove_false_pos = function(data, aT=4, category = FALSE, alpha = 0.2, ...) {
   non_mock_samples_mock_spec = dplyr::select(non_mock_samples, mock_spec_names)
   max_reads = max(non_mock_samples_mock_spec)
 
-  max_row_col = which(non_mock_samples_mock_spec == max_reads, arr.ind=TRUE)
+  max_row_col = which(non_mock_samples_mock_spec == max_reads, arr .ind=TRUE)
   imax_num = max_row_col[,"row"]
   # only refers to non_mock_samples
 
