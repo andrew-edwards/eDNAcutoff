@@ -4,22 +4,22 @@
 \alias{change_alpha}
 \title{Loops over values of alpha -- **needs tidying up**}
 \usage{
-change_alpha(data, alpha.vec = seq(0, 1, 0.1), aT = 4)
+change_alpha(data, alpha_vec = seq(0, 1, 0.1), aT = 4)
 }
 \arguments{
 \item{data}{As for remove_false_pos()}
 
-\item{alpha.vec}{Vector of alpha (tolerance) values over which to run remove_false_pos().}
+\item{alpha_vec}{Vector of alpha (tolerance) values over which to run remove_false_pos().}
 
-\item{aT}{Total number of absent species.}
+\item{aT}{Total number of control species.}
 }
 \value{
 List consisting of:
    ***:  list of dataframes, one for each result of the corresponding
    value of alpha;
-   num.zeroed: vector corresponding to the number of reads set to zero for each value of alphavec;
-   num.mock.sp.left: ***
-   num.samp.with.mock: ***
+   num_zeroed: vector corresponding to the number of reads set to zero for each value of alphavec;
+   num_mock_sp_left: ***
+   num_samp_with_mock: ***
 }
 \description{
 Removes false positives for various values of the tolerance parameter alpha

@@ -13,10 +13,10 @@ species, with species represented by columns. The first row represents a
 mock sample and remaining rows are real samples. The first column must be
 called Sample and gives the name of the samples (mock sample must be
 called 'mock'), next column is the category (if category == TRUE) which
-gets removed for this function, next aT columns are reads of absent species,
-and the remaining columns are reads of non-absent species.}
+gets removed for this function, next aT columns are reads of control species,
+and the remaining columns are reads of non-control species.}
 
-\item{aT}{Total number of absent species.}
+\item{aT}{Total number of control species.}
 
 \item{category}{TRUE if second column is a category column, FALSE if there
 is no category column.}
