@@ -3,8 +3,13 @@
 #  and create examples. Have run this once, be wary about re-running whole thing
 #  again - if do then check what changes.
 
-big_example <- readr::read_csv("data-raw/data_for_andy.csv",
-                               comment="#")
+# big_example <- readr::read_csv("data-raw/data_for_andy.csv",
+#                               comment="#")
+# That didn't fully anonmyise, as str(big_example) still showed
+#  original column names even when changing names below.
+big_example <- read.csv("data-raw/data_for_andy.csv",
+                        comment="#") %>%
+               as_tibble()
 
 # Remove blank samples and the Category_Sample_blank column
 big_example <- dplyr::filter(big_example, Category_Sample_blank != "b") %>%
@@ -19,7 +24,10 @@ usethis::use_data(big_example, overwrite = TRUE)
 
 # Running this once to create test result, change by hand if necessary (though can't as not .csv - Issue #)
 # big_example_result <- remove_false_pos(big_example)
-# readr::write_csv(big_example_result, "data-raw/big_example_result.csv")  # run once to create, get Davon to manually check, and then edit the .csv file if the result should changed
+# readr::write_csv(big_example_result, "data-raw/big_example_result.csv")
+#  have run that once to create, get Davon to manually check,
+#  and then edit the .csv file if the result should changed. Have checked that
+#  str(big_example_result) is anonymised (haven't had to resave).
 big_example_result <- readr::read_csv("data-raw/big_example_result.csv")
 usethis::use_data(big_example_result, overwrite = TRUE)
 
