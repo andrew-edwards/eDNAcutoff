@@ -28,7 +28,8 @@ usethis::use_data(big_example, overwrite = TRUE)
 #  have run that once to create, get Davon to manually check,
 #  and then edit the .csv file if the result should changed. Have checked that
 #  str(big_example_result) is anonymised (haven't had to resave).
-# Not re-running (10/9/19), since numbers not changing, just str() I think.
+# Have re-run (10/9/19), though numbers not changed, just str() I think. Git
+# shell thought .csv had changed, though it hadn't.
 big_example_result <- readr::read_csv("data-raw/big_example_result.csv")
 usethis::use_data(big_example_result, overwrite = TRUE)
 
