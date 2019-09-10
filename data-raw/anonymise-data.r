@@ -40,8 +40,11 @@ usethis::use_data(big_example_zeros, overwrite = TRUE)
 
 # Do same for small example
 
-small_example <- readr::read_csv("data-raw/data_manual_test.csv",
-                               comment="#")
+#small_example <- readr::read_csv("data-raw/data_manual_test.csv",
+#                               comment="#")
+small_example <- read.csv("data-raw/data_manual_test.csv",
+                          comment="#") %>%
+                 as_tibble()
 
 # Remove blank samples and the Category_Sample_blank column
 small_example <- dplyr::select(small_example, -Category_Sample_blank)
@@ -57,7 +60,12 @@ usethis::use_data(small_example, overwrite = TRUE)
 #  remove_false_pos().  So if anything changes have to manually edit .csv again:
 # readr::write_csv(small_example, "data-raw/data_manual_test_result.csv")
 
-small_example_result <- readr::read_csv("data-raw/data_manual_test_result.csv")
+# small_example_result <- readr::read_csv("data-raw/data_manual_test_result.csv")
+small_example_result <- read.csv("data-raw/data_manual_test_result.csv") %>%
+                        as_tibble()
+names(small_example_result)[6:8]  <- c(1, 2, 3)   # Numbers in .csv get
+                                        # converted to X1, X2, X3.
+small_example_result$Sample <- as.character(small_example_result$Sample)
 
 usethis::use_data(small_example_result, overwrite = TRUE)
 
