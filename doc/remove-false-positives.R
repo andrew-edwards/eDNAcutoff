@@ -4,6 +4,9 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.width = 6
 )
+# Switch for landscape tables in pdf:
+output_html = ifelse(rmarkdown::metadata$output == "rmarkdown::html_vignette", TRUE, FALSE)
+if(!output_html) library(kableExtra)
 
 ## ------------------------------------------------------------------------
 library(eDNAcutoff)
@@ -75,7 +78,10 @@ knitr::kable(small_sens_alpha$out_list[[7]])
 #  big_example
 
 ## ---- echo=FALSE, results='asis'-----------------------------------------
-knitr::kable(big_example)
+if(output_html){
+  knitr::kable(big_example) } else {
+                              knitr::kable(big_example) # %>% kableExtra::landscape()
+                              }
 
 ## ---- echo=TRUE, results='asis', eval=FALSE------------------------------
 #  big_removed <- remove_false_pos(big_example)
