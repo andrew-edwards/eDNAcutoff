@@ -157,8 +157,6 @@ big_example
 if(output_html){
   knitr::kable(big_example) } else {
                               library(kableExtra)
-                              # knitr::kable(big_example) # %>%
-                              # kableExtra::landscape()
                               kableExtra::kable(big_example, longtable = TRUE,
                                                 booktabs = TRUE) %>%
                                 kable_styling(font_size = 7) %>%
@@ -175,7 +173,13 @@ big_removed
 
 ```{r, echo=FALSE, results='asis'}
 big_removed <- remove_false_pos(big_example)
-knitr::kable(big_removed)
+if(output_html){
+  knitr::kable(big_removed) } else {
+                              kableExtra::kable(big_removed, longtable = TRUE,
+                                                booktabs = TRUE) %>%
+                                kable_styling(font_size = 7) %>%
+                                landscape()
+                              }
 ```
 
 And again, to see which reads were set to zero use `which_set_to_zero()`:
@@ -187,7 +191,14 @@ big_set_to_zero
 
 ```{r, echo=FALSE, results='asis'}
 big_set_to_zero <- which_set_to_zero(big_example, big_removed)
-knitr::kable(big_set_to_zero)
+if(output_html){
+  knitr::kable(big_set_to_zero) } else {
+                                kableExtra::kable(big_set_to_zero, longtable = TRUE,
+                                                booktabs = TRUE) %>%
+                                kable_styling(font_size = 7) %>%
+                                landscape()
+                              }
+
 ```
 
 **To test sensitivity to** $\alpha$, **do as above (but just plot the results here)**

@@ -80,8 +80,6 @@ knitr::kable(small_sens_alpha$out_list[[7]])
 if(output_html){
   knitr::kable(big_example) } else {
                               library(kableExtra)
-                              # knitr::kable(big_example) # %>%
-                              # kableExtra::landscape()
                               kableExtra::kable(big_example, longtable = TRUE,
                                                 booktabs = TRUE) %>%
                                 kable_styling(font_size = 7) %>%
@@ -94,7 +92,13 @@ if(output_html){
 
 ## ---- echo=FALSE, results='asis'-----------------------------------------
 big_removed <- remove_false_pos(big_example)
-knitr::kable(big_removed)
+if(output_html){
+  knitr::kable(big_removed) } else {
+                              kableExtra::kable(big_removed, longtable = TRUE,
+                                                booktabs = TRUE) %>%
+                                kable_styling(font_size = 7) %>%
+                                landscape()
+                              }
 
 ## ---- echo=TRUE, results='asis', eval=FALSE------------------------------
 #  big_set_to_zero <- which_set_to_zero(big_example, big_removed)
@@ -102,7 +106,14 @@ knitr::kable(big_removed)
 
 ## ---- echo=FALSE, results='asis'-----------------------------------------
 big_set_to_zero <- which_set_to_zero(big_example, big_removed)
-knitr::kable(big_set_to_zero)
+if(output_html){
+  knitr::kable(big_set_to_zero) } else {
+                                kableExtra::kable(big_set_to_zero, longtable = TRUE,
+                                                booktabs = TRUE) %>%
+                                kable_styling(font_size = 7) %>%
+                                landscape()
+                              }
+
 
 ## ---- echo=TRUE, results='asis'------------------------------------------
 big_sens_alpha <- change_alpha(big_example, alpha_vec = alpha_values)
