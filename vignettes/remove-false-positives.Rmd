@@ -2,8 +2,11 @@
 title: "remove-false-positives"
 author: "Andrew Edwards"
 date: "`r Sys.Date()`"
+# Uncomment either html or pdf lines (pdf fails Travis, ok though)
 # output: rmarkdown::html_vignette
-output: rmarkdown::pdf_document
+output:
+  pdf_document:
+    keep_tex: true
 vignette: >
   %\VignetteIndexEntry{remove-false-positives}
   %\VignetteEngine{knitr::rmarkdown}
