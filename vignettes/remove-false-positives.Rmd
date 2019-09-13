@@ -2,7 +2,8 @@
 title: "remove-false-positives"
 author: "Andrew Edwards"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette # pdf_document
+# output: rmarkdown::html_vignette
+output: rmarkdown::pdf_document
 # If pdf_document then uncomment these four lines:
 # header-includes:
 # - \usepackage{pdflscape}
@@ -22,7 +23,6 @@ knitr::opts_chunk$set(
 )
 # Switch for landscape tables in pdf:
 output_html = ifelse(rmarkdown::metadata$output == "rmarkdown::html_vignette", TRUE, FALSE)
-if(!output_html) library(kableExtra)
 ```
 
 ## Small example
@@ -156,7 +156,13 @@ big_example
 ```{r, echo=FALSE, results='asis'}
 if(output_html){
   knitr::kable(big_example) } else {
-                              knitr::kable(big_example) # %>% kableExtra::landscape()
+                              library(kableExtra)
+                              # knitr::kable(big_example) # %>%
+                              # kableExtra::landscape()
+                              kableExtra::kable(big_example, longtable = TRUE,
+                                                booktabs = TRUE) %>%
+                                kable_styling(font_size = 7) %>%
+                                landscape()
                               }
 ```
 
